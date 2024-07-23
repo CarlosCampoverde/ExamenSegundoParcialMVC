@@ -8,6 +8,7 @@ import Footer from "./components/Footer"
 import Portada from "./components/Portada";
 import TaskList from "./components/TaskList";
 import AddTask from "./components/AddTask";
+// import AuthPage from "./components/Authpage";
 
 
 
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body className={inter.className}>{children}
         <Header></Header>
         <Portada></Portada>
+        
         <AddTask></AddTask>  
         <TaskList></TaskList>
         <Footer></Footer>
