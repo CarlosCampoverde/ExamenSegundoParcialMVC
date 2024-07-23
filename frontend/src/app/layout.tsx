@@ -6,6 +6,8 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer"
 import Portada from "./components/Portada";
+import TaskList from "./components/TaskList";
+import AddTask from "./components/AddTask";
 
 
 
@@ -25,8 +27,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>{children}
         <Header></Header>
-        <Portada></Portada> 
-       
+        <Portada></Portada>
+        <AddTask></AddTask>  
+        <TaskList></TaskList>
         <Footer></Footer>
       </body>
     </html>
