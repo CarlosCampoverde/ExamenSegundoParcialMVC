@@ -89,6 +89,8 @@ const TasksPage = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             ...editingTask,
+            descripcion: newTask.descripcion,
+            estado: newTask.estado,
             fecha_creacion: newTask.fecha_creacion.toISOString(), // Convertir Date a cadena ISO
             fecha_vencimiento: newTask.fecha_vencimiento.toISOString(), // Convertir Date a cadena ISO
             usuario_id: newTask.usuario_id
