@@ -1,4 +1,3 @@
-// pages/tasks.tsx
 import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import styles from '../styles/Task.module.css';
@@ -14,8 +13,15 @@ interface Task {
   usuario_id: number;
 }
 
+interface User {
+  id: number;
+  nombre: string; // o cualquier otro campo que desees mostrar
+  apellido: string;
+}
+
 const TasksPage = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [newTask, setNewTask] = useState<{
     descripcion: string;
     estado: string;
@@ -37,6 +43,7 @@ const TasksPage = () => {
 
   useEffect(() => {
     fetchTasks();
+    fetchUsers(); // Llamada para obtener los usuarios
   }, []);
 
   const fetchTasks = async () => {
@@ -50,6 +57,16 @@ const TasksPage = () => {
       })));
     } catch (error) {
       console.error('Failed to fetch tasks:', error);
+    }
+  };
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/usuarios/ver'); // Ajusta la ruta según tu API
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error('Failed to fetch users:', error);
     }
   };
 
@@ -166,11 +183,11 @@ const TasksPage = () => {
       <div className={styles.header}>
         <h1>Gestor de Tareas</h1>
       </div>
-  
+
       <div className={styles.section}>
         <button className={`${styles.button} ${styles.addButton}`} onClick={() => openModal()}>Crear nueva Tarea</button>
       </div>
-  
+
       <div className={styles.section}>
         <h2>Lista de Tareas</h2>
         <table className={styles.table}>
@@ -201,7 +218,7 @@ const TasksPage = () => {
           </tbody>
         </table>
       </div>
-  
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -216,13 +233,16 @@ const TasksPage = () => {
           value={newTask.descripcion}
           onChange={(e) => setNewTask({ ...newTask, descripcion: e.target.value })}
         />
-        <input
-          type="text"
+        <select
           className={styles.inputField}
-          placeholder="Estado"
           value={newTask.estado}
           onChange={(e) => setNewTask({ ...newTask, estado: e.target.value })}
-        />
+        >
+          <option value="">Seleccionar Estado</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="En Proceso">En Proceso</option>
+          <option value="Completado">Completado</option>
+        </select>
         <input
           type="date"
           className={styles.inputField}
@@ -235,42 +255,46 @@ const TasksPage = () => {
           value={newTask.fecha_vencimiento.toISOString().split('T')[0]} // Mostrar solo la parte de la fecha
           onChange={(e) => setNewTask({ ...newTask, fecha_vencimiento: new Date(e.target.value) })}
         />
-        <input
-          type="number"
+        <select
           className={styles.inputField}
-          placeholder="Usuario ID"
           value={newTask.usuario_id}
-          onChange={(e) => setNewTask({ ...newTask, usuario_id: Number(e.target.value) })}
-        />
-        <button className={styles.button} onClick={isEditing ? handleEditTask : handleAddTask}>
-          {isEditing ? 'Guardar cambios' : 'Crear Tarea'}
+          onChange={(e) => setNewTask({ ...newTask, usuario_id: parseInt(e.target.value) })}
+        >
+          <option value="0">Seleccionar Usuario</option>
+          {users.map((user) => (
+            <option key={user.id} value={user.id}>{user.nombre+' '+user.apellido}</option>
+          ))}
+        </select>
+        <button
+          className={`${styles.button} ${styles.saveButton}`}
+          onClick={isEditing ? handleEditTask : handleAddTask}
+        >
+          {isEditing ? 'Guardar Cambios' : 'Crear Tarea'}
         </button>
         <button className={styles.button} onClick={closeModal}>Cancelar</button>
       </Modal>
-  
+
       <Modal
         isOpen={successModalIsOpen}
         onRequestClose={closeSuccessModal}
-        className={`${styles.modal} ${styles.successModal}`}
+        className={styles.successModal}
         overlayClassName={styles.overlay}
       >
-        <h2>Éxito</h2>
-        <p>{isEditing ? 'La tarea se editó con éxito.' : 'La tarea se creó con éxito.'}</p>
+        <h2>{isEditing ? 'Tarea actualizada exitosamente' : 'Tarea creada exitosamente'}</h2>
         <button className={styles.button} onClick={closeSuccessModal}>Aceptar</button>
       </Modal>
   
       <Modal
         isOpen={deleteSuccessModalIsOpen}
         onRequestClose={closeDeleteSuccessModal}
-        className={`${styles.modal} ${styles.deleteSuccessModal}`}
+        className={styles.successModal}
         overlayClassName={styles.overlay}
       >
-        <h2>Éxito</h2>
-        <p>La tarea se eliminó con éxito.</p>
+        <h2>Tarea eliminada exitosamente</h2>
         <button className={styles.button} onClick={closeDeleteSuccessModal}>Aceptar</button>
       </Modal>
     </div>
   );
-};
+}
 
 export default TasksPage;
