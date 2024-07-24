@@ -1,9 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const userRoutes = require('./routes/userRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const sequelize = require('./config/database');
 
+app.use(cors());
 app.use(express.json());  // Middleware para parsear JSON
 app.use(express.urlencoded({ extended: true })); // Middleware para parsear datos de formularios
 

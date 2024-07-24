@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const bcrypt = require('bcrypt'); // Asegúrate de instalar bcrypt
 
 const Usuario = sequelize.define('usuarios', {
   nombre: {
@@ -34,5 +35,7 @@ const Usuario = sequelize.define('usuarios', {
 }, {
   timestamps: false
 });
+
+
 
 module.exports = Usuario;
