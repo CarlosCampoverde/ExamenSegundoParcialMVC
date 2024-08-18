@@ -61,7 +61,7 @@ const Login = () => {
       }
 
       // Redirige al usuario a la página de tareas
-      router.push('/task'); // Cambia la ruta según sea necesario
+      router.push('/user'); // Cambia la ruta según sea necesario
 
     } catch (error: any) {
       setError(error.message);
@@ -120,7 +120,7 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Login - Task Task Task</title>
+        <title>Login - Dragon Ball Z</title>
         <meta name="description" content="Página de login" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -128,9 +128,9 @@ const Login = () => {
       <main className={styles.main}>
         <div className={styles.loginContainer}>
           <div className={styles.leftContainer}>
-            <img src="https://cdn.textstudio.com/output/sample/normal/1/9/2/6/task-logo-73-16291.png" alt="Descripción de la imagen" className={styles.image} />
-            <h1 className={styles.welcomeTitle}>Hola, Bienvenido!</h1>
-            <p className={styles.description}>Recuerda todo lo que haces y debas hacer hoy, mañana y siempre.</p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Dragon_Ball_Z_logo.svg" alt="Descripción de la imagen" className={styles.image} />
+            <h1 className={styles.welcomeTitle}>BIENVENIDO</h1>
+            <p className={styles.description}>Desata tu poder Saiyan: Explora el universo de Dragon Ball Z como nunca antes.</p>
           </div>
           <div className={styles.rightContainer}>
             <form className={styles.form} onSubmit={handleSubmit}>

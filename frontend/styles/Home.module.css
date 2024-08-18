@@ -27,7 +27,7 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: #f35500;
   text-decoration: none;
 }
 
@@ -53,7 +53,7 @@
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  background-color: #0070f3;
+  background-color: #f35500;
   color: white;
   border: none;
   cursor: pointer;

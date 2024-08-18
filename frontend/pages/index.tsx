@@ -7,18 +7,18 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>TASK TASK TASK</title>
+        <title>Dragon Ball Z</title>
         <meta name="description" content="Página creada desde cero con Next.js" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Bienvenido a <a href="#">Task Task Task</a>
+          Bienvenido a <a href="#">DRAGON BALL Z</a>
         </h1>
 
         <p className={styles.description}>
-          Recuerda tus tareas pendientes hoy, mañana y siempre.
+          Desata tu poder Saiyan: Explora el universo de Dragon Ball Z como nunca antes.
         </p>
 
         <Link href="/login">
